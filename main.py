@@ -145,7 +145,10 @@ class MusicPlayer(QWidget):
             self.song_label.setText("No MP3s Found")
             return
         song = self.songs[self.current_index]
-        self.song_label.setText(f"Song: {song}")
+        display_name = song
+        if len(display_name) > 43:
+            display_name = display_name[:40] + "..."
+        self.song_label.setText(f"Song: {display_name}")
         audio = MP3(song)
         self.bitrate_label.setText(f"BITRATE: {audio.info.bitrate // 1000} kbps")
         self.mixrate_label.setText(f"MIXRATE: {int(audio.info.sample_rate / 1000)} kHz")
